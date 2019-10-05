@@ -1,0 +1,28 @@
+{
+  "name": "serverless-helper",
+  "version": "1.0.0",
+  "description": "A helper framework to write your serverless application configuration file",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://jormaechea@github.com/jormaechea/serverless-helper.git"
+  },
+  "keywords": [
+    "serverless",
+    "serverless-framework",
+    "serverless-config-file",
+    "helper",
+    "serverless-helper",
+    "node",
+    "js"
+  ],
+  "author": "Joaquin Ormaechea",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jormaechea/serverless-helper/issues"
+  },
+  "homepage": "https://github.com/jormaechea/serverless-helper#readme"
+}
