@@ -182,5 +182,45 @@ describe('Core plugins', () => {
 				}
 			});
 		});
+
+		it('Should return an object with the raw properties applied', () => {
+
+			const bucketResult = bucket({
+				resourceName: 'MyBucket',
+				name: 'my-bucket',
+				rawProps: {
+					DeletionPolicy: 'Retain',
+					Tags: [
+						{
+							Key: 'MyTag',
+							Value: 'TheValue'
+						}
+					]
+				}
+			});
+
+			assert.deepStrictEqual(bucketResult, {
+				MyBucket: {
+					Type: 'AWS::S3::Bucket',
+					Properties: {
+						AccessControl: 'Private',
+						PublicAccessBlockConfiguration: {
+							BlockPublicAcls: true,
+							BlockPublicPolicy: true,
+							IgnorePublicAcls: true,
+							RestrictPublicBuckets: true
+						},
+						BucketName: 'my-bucket',
+						DeletionPolicy: 'Retain',
+						Tags: [
+							{
+								Key: 'MyTag',
+								Value: 'TheValue'
+							}
+						]
+					}
+				}
+			});
+		});
 	});
 });
