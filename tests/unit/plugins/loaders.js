@@ -2,6 +2,8 @@
 
 const assert = require('assert').strict;
 
+const mockRequire = require('mock-require');
+
 const { loadPlugins, loadCorePlugins } = require('../../../lib/plugins/loaders');
 
 describe('Plugin loaders', () => {
@@ -19,23 +21,32 @@ describe('Plugin loaders', () => {
 
 	describe('Custom plugins loader', () => {
 
+		it('Should throw if a custom plugin is not installed', () => {
+			assert.throws(() => loadPlugins([
+				'non-existing-plugin'
+			]));
+		});
+
 		it('Should return an object with the custom plugins', () => {
 
-			const myPlugin = () => {};
+			const existingPlugin = () => {};
+			const anotherPlugin = () => {};
 
-			function myOtherPlugin() {}
+			mockRequire('sls-helper-plugin-existing', existingPlugin);
+			mockRequire('sls-helper-plugin-another-one', anotherPlugin);
 
 			const customPlugins = loadPlugins([
-				myPlugin,
-				myOtherPlugin,
-				{ name: 'myCustomPlugin', handler: myPlugin }
+				'existing',
+				'another-one'
 			]);
 
 			assert.deepStrictEqual(customPlugins, {
-				myPlugin,
-				myOtherPlugin,
-				myCustomPlugin: myPlugin
+				existing: existingPlugin,
+				'another-one': anotherPlugin
 			});
+
+			mockRequire.stop('sls-helper-plugin-existing');
+			mockRequire.stop('sls-helper-plugin-another-one');
 		});
 
 	});
