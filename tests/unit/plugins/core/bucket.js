@@ -32,7 +32,7 @@ describe('Core plugins', () => {
 			});
 		});
 
-		it('Should return an object with the default bucket configuration', () => {
+		it('Should return an object with custom ACL', () => {
 
 			const bucketResult = bucket({
 				resourceName: 'MyBucket',
