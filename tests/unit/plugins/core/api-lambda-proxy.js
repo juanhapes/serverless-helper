@@ -61,16 +61,18 @@ describe('Core plugins', () => {
 							method: 'get',
 							private: false,
 							request: {
-								paths: {
-									petId: true
-								},
-								querystrings: {
-									page: true,
-									pageSize: false
-								},
-								headers: {
-									'x-foo': true,
-									'x-bar': true
+								parameters: {
+									paths: {
+										petId: true
+									},
+									querystrings: {
+										page: true,
+										pageSize: false
+									},
+									headers: {
+										'x-foo': true,
+										'x-bar': true
+									}
 								}
 							}
 						}
