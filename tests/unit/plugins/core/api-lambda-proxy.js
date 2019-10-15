@@ -234,5 +234,31 @@ describe('Core plugins', () => {
 				}
 			});
 		});
+
+		it('Should return an object with API Lambda Proxy configuration with as async integration', () => {
+
+			const apiLambdaProxyResult = apiLambdaProxy({
+				functionName: 'MyFunction',
+				handler: 'path/to/handler.export',
+				path: '/pets',
+				method: 'get',
+				async: true
+			});
+
+			assert.deepStrictEqual(apiLambdaProxyResult, {
+				MyFunction: {
+					handler: 'path/to/handler.export',
+					events: [{
+						http: {
+							integration: 'lambda-proxy',
+							path: '/pets',
+							method: 'get',
+							private: false,
+							async: true
+						}
+					}]
+				}
+			});
+		});
 	});
 });
