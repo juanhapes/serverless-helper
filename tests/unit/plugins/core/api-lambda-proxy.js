@@ -80,5 +80,71 @@ describe('Core plugins', () => {
 				}
 			});
 		});
+
+		it('Should return an object with API Lambda Proxy configuration with CORS as true', () => {
+
+			const apiLambdaProxyResult = apiLambdaProxy({
+				functionName: 'MyFunction',
+				handler: 'path/to/handler.export',
+				path: '/pets',
+				method: 'get',
+				cors: true
+			});
+
+			assert.deepStrictEqual(apiLambdaProxyResult, {
+				MyFunction: {
+					handler: 'path/to/handler.export',
+					events: [{
+						http: {
+							integration: 'lambda-proxy',
+							path: '/pets',
+							method: 'get',
+							private: false,
+							cors: true
+						}
+					}]
+				}
+			});
+		});
+
+		it('Should return an object with API Lambda Proxy configuration with CORS as an object', () => {
+
+			const apiLambdaProxyResult = apiLambdaProxy({
+				functionName: 'MyFunction',
+				handler: 'path/to/handler.export',
+				path: '/pets',
+				method: 'get',
+				cors: {
+					origin: 'http://www.example.com',
+					headers: [
+						'x-foo',
+						'x-bar'
+					],
+					allowCredentials: false
+				}
+			});
+
+			assert.deepStrictEqual(apiLambdaProxyResult, {
+				MyFunction: {
+					handler: 'path/to/handler.export',
+					events: [{
+						http: {
+							integration: 'lambda-proxy',
+							path: '/pets',
+							method: 'get',
+							private: false,
+							cors: {
+								origin: 'http://www.example.com',
+								headers: [
+									'x-foo',
+									'x-bar'
+								],
+								allowCredentials: false
+							}
+						}
+					}]
+				}
+			});
+		});
 	});
 });
