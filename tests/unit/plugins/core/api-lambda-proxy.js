@@ -146,5 +146,93 @@ describe('Core plugins', () => {
 				}
 			});
 		});
+
+		it('Should return an object with API Lambda Proxy configuration with IAM authorizer', () => {
+
+			const apiLambdaProxyResult = apiLambdaProxy({
+				functionName: 'MyFunction',
+				handler: 'path/to/handler.export',
+				path: '/pets',
+				method: 'get',
+				authorizer: 'aws_iam'
+			});
+
+			assert.deepStrictEqual(apiLambdaProxyResult, {
+				MyFunction: {
+					handler: 'path/to/handler.export',
+					events: [{
+						http: {
+							integration: 'lambda-proxy',
+							path: '/pets',
+							method: 'get',
+							private: false,
+							authorizer: 'aws_iam'
+						}
+					}]
+				}
+			});
+		});
+
+		it('Should return an object with API Lambda Proxy configuration with custom authorizer name', () => {
+
+			const apiLambdaProxyResult = apiLambdaProxy({
+				functionName: 'MyFunction',
+				handler: 'path/to/handler.export',
+				path: '/pets',
+				method: 'get',
+				authorizer: 'myCustomAuthorizer'
+			});
+
+			assert.deepStrictEqual(apiLambdaProxyResult, {
+				MyFunction: {
+					handler: 'path/to/handler.export',
+					events: [{
+						http: {
+							integration: 'lambda-proxy',
+							path: '/pets',
+							method: 'get',
+							private: false,
+							authorizer: 'myCustomAuthorizer'
+						}
+					}]
+				}
+			});
+		});
+
+		it('Should return an object with API Lambda Proxy configuration with authorizer as object', () => {
+
+			const apiLambdaProxyResult = apiLambdaProxy({
+				functionName: 'MyFunction',
+				handler: 'path/to/handler.export',
+				path: '/pets',
+				method: 'get',
+				authorizer: {
+					name: 'myCustomAuthorizer',
+					resultTtlInSeconds: 300,
+					identitySource: 'method.request.header.Authorization',
+					type: 'token'
+				}
+			});
+
+			assert.deepStrictEqual(apiLambdaProxyResult, {
+				MyFunction: {
+					handler: 'path/to/handler.export',
+					events: [{
+						http: {
+							integration: 'lambda-proxy',
+							path: '/pets',
+							method: 'get',
+							private: false,
+							authorizer: {
+								name: 'myCustomAuthorizer',
+								resultTtlInSeconds: 300,
+								identitySource: 'method.request.header.Authorization',
+								type: 'token'
+							}
+						}
+					}]
+				}
+			});
+		});
 	});
 });
