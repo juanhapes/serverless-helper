@@ -29,8 +29,13 @@ describe('Plugin loaders', () => {
 
 		it('Should return an object with the custom plugins', () => {
 
-			const existingPlugin = () => {};
-			const anotherPlugin = () => {};
+			const existingPlugin = {
+				existingPluginMethod1: () => {},
+				existingPluginMethod2: () => {}
+			};
+			const anotherPlugin = {
+				anotherPluginMethod1: () => {}
+			};
 
 			mockRequire('sls-helper-plugin-existing', existingPlugin);
 			mockRequire('sls-helper-plugin-another-one', anotherPlugin);
