@@ -1,6 +1,6 @@
 # Serverless Helper
 
-A framework to implement serverless framework config fil with ease and standarized resources.
+A framework to implement serverless framework config file with ease and standarized resources.
 
 ## Usage
 
