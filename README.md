@@ -71,6 +71,6 @@ Used to implement Lambda Proxy APIs
 | useApiKey | boolean | Whether the API requires API key or not | | false |
 | queryParameters | object | A key value to map query string parameters to a boolean indicating if it's required or not | | |
 | requestHeaders | object | A key value to map headers to a boolean indicating if it's required or not | | |
-| authorizer | string | The name of the authorizer | Valid authorizers: FullAuthorizer, NoClientAuthorizer | |
+| authorizer | string | The authorizer config | See the [official documentation](https://serverless.com/framework/docs/providers/aws/events/apigateway/#http-endpoints-with-aws_iam-authorizers) | |
 | cors | object \| boolean | See the [official documentation](https://serverless.com/framework/docs/providers/aws/events/apigateway#enabling-cors) | | |
 | async | boolean | Whether the API will execute as an async lambda or not | | false |
