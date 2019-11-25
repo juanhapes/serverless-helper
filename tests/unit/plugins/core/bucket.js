@@ -2,7 +2,7 @@
 
 const assert = require('assert').strict;
 
-const bucket = require('../../.././../lib/plugins/core/bucket');
+const { bucket } = require('../../.././../lib/plugins/core');
 
 describe('Core plugins', () => {
 
@@ -10,23 +10,27 @@ describe('Core plugins', () => {
 
 		it('Should return an object with the default bucket configuration', () => {
 
-			const bucketResult = bucket({
+			const bucketResult = bucket({}, {
 				resourceName: 'MyBucket',
 				name: 'my-bucket'
 			});
 
 			assert.deepStrictEqual(bucketResult, {
-				MyBucket: {
-					Type: 'AWS::S3::Bucket',
-					Properties: {
-						AccessControl: 'Private',
-						PublicAccessBlockConfiguration: {
-							BlockPublicAcls: true,
-							BlockPublicPolicy: true,
-							IgnorePublicAcls: true,
-							RestrictPublicBuckets: true
-						},
-						BucketName: 'my-bucket'
+				resources: {
+					Resources: {
+						MyBucket: {
+							Type: 'AWS::S3::Bucket',
+							Properties: {
+								AccessControl: 'Private',
+								PublicAccessBlockConfiguration: {
+									BlockPublicAcls: true,
+									BlockPublicPolicy: true,
+									IgnorePublicAcls: true,
+									RestrictPublicBuckets: true
+								},
+								BucketName: 'my-bucket'
+							}
+						}
 					}
 				}
 			});
@@ -34,24 +38,28 @@ describe('Core plugins', () => {
 
 		it('Should return an object with custom ACL', () => {
 
-			const bucketResult = bucket({
+			const bucketResult = bucket({}, {
 				resourceName: 'MyBucket',
 				name: 'my-bucket',
 				acl: 'MyAcl'
 			});
 
 			assert.deepStrictEqual(bucketResult, {
-				MyBucket: {
-					Type: 'AWS::S3::Bucket',
-					Properties: {
-						AccessControl: 'MyAcl',
-						PublicAccessBlockConfiguration: {
-							BlockPublicAcls: true,
-							BlockPublicPolicy: true,
-							IgnorePublicAcls: true,
-							RestrictPublicBuckets: true
-						},
-						BucketName: 'my-bucket'
+				resources: {
+					Resources: {
+						MyBucket: {
+							Type: 'AWS::S3::Bucket',
+							Properties: {
+								AccessControl: 'MyAcl',
+								PublicAccessBlockConfiguration: {
+									BlockPublicAcls: true,
+									BlockPublicPolicy: true,
+									IgnorePublicAcls: true,
+									RestrictPublicBuckets: true
+								},
+								BucketName: 'my-bucket'
+							}
+						}
 					}
 				}
 			});
@@ -59,29 +67,33 @@ describe('Core plugins', () => {
 
 		it('Should return an object with the default CORS configuration if cors prop is true', () => {
 
-			const bucketResult = bucket({
+			const bucketResult = bucket({}, {
 				resourceName: 'MyBucket',
 				name: 'my-bucket',
 				cors: true
 			});
 
 			assert.deepStrictEqual(bucketResult, {
-				MyBucket: {
-					Type: 'AWS::S3::Bucket',
-					Properties: {
-						AccessControl: 'Private',
-						PublicAccessBlockConfiguration: {
-							BlockPublicAcls: true,
-							BlockPublicPolicy: true,
-							IgnorePublicAcls: true,
-							RestrictPublicBuckets: true
-						},
-						BucketName: 'my-bucket',
-						CorsConfiguration: {
-							CorsRules: [{
-								AllowedMethods: ['*'],
-								AllowedOrigins: ['*']
-							}]
+				resources: {
+					Resources: {
+						MyBucket: {
+							Type: 'AWS::S3::Bucket',
+							Properties: {
+								AccessControl: 'Private',
+								PublicAccessBlockConfiguration: {
+									BlockPublicAcls: true,
+									BlockPublicPolicy: true,
+									IgnorePublicAcls: true,
+									RestrictPublicBuckets: true
+								},
+								BucketName: 'my-bucket',
+								CorsConfiguration: {
+									CorsRules: [{
+										AllowedMethods: ['*'],
+										AllowedOrigins: ['*']
+									}]
+								}
+							}
 						}
 					}
 				}
@@ -90,7 +102,7 @@ describe('Core plugins', () => {
 
 		it('Should return an object with custom CORS configuration with one rule', () => {
 
-			const bucketResult = bucket({
+			const bucketResult = bucket({}, {
 				resourceName: 'MyBucket',
 				name: 'my-bucket',
 				cors: {
@@ -102,26 +114,30 @@ describe('Core plugins', () => {
 			});
 
 			assert.deepStrictEqual(bucketResult, {
-				MyBucket: {
-					Type: 'AWS::S3::Bucket',
-					Properties: {
-						AccessControl: 'Private',
-						PublicAccessBlockConfiguration: {
-							BlockPublicAcls: true,
-							BlockPublicPolicy: true,
-							IgnorePublicAcls: true,
-							RestrictPublicBuckets: true
-						},
-						BucketName: 'my-bucket',
-						CorsConfiguration: {
-							CorsRules: [{
-								AllowedMethods: ['*'],
-								AllowedOrigins: ['*'],
-								AllowedHeaders: ['x-foo'],
-								ExposedHeaders: ['x-bar'],
-								Id: 'MyRule',
-								MaxAge: 60
-							}]
+				resources: {
+					Resources: {
+						MyBucket: {
+							Type: 'AWS::S3::Bucket',
+							Properties: {
+								AccessControl: 'Private',
+								PublicAccessBlockConfiguration: {
+									BlockPublicAcls: true,
+									BlockPublicPolicy: true,
+									IgnorePublicAcls: true,
+									RestrictPublicBuckets: true
+								},
+								BucketName: 'my-bucket',
+								CorsConfiguration: {
+									CorsRules: [{
+										AllowedMethods: ['*'],
+										AllowedOrigins: ['*'],
+										AllowedHeaders: ['x-foo'],
+										ExposedHeaders: ['x-bar'],
+										Id: 'MyRule',
+										MaxAge: 60
+									}]
+								}
+							}
 						}
 					}
 				}
@@ -130,7 +146,7 @@ describe('Core plugins', () => {
 
 		it('Should return an object with custom CORS configuration with multiple rules', () => {
 
-			const bucketResult = bucket({
+			const bucketResult = bucket({}, {
 				resourceName: 'MyBucket',
 				name: 'my-bucket',
 				cors: [{
@@ -150,33 +166,37 @@ describe('Core plugins', () => {
 			});
 
 			assert.deepStrictEqual(bucketResult, {
-				MyBucket: {
-					Type: 'AWS::S3::Bucket',
-					Properties: {
-						AccessControl: 'Private',
-						PublicAccessBlockConfiguration: {
-							BlockPublicAcls: true,
-							BlockPublicPolicy: true,
-							IgnorePublicAcls: true,
-							RestrictPublicBuckets: true
-						},
-						BucketName: 'my-bucket',
-						CorsConfiguration: {
-							CorsRules: [{
-								AllowedMethods: ['GET', 'POST'],
-								AllowedOrigins: ['http://example.com', 'http://www.example.com'],
-								AllowedHeaders: ['x-foo'],
-								ExposedHeaders: ['x-bar'],
-								Id: 'MyFirstRule',
-								MaxAge: 60
-							}, {
-								AllowedMethods: ['*'],
-								AllowedOrigins: ['*'],
-								AllowedHeaders: ['x-foo', 'x-foo2'],
-								ExposedHeaders: ['x-bar', 'x-bar2'],
-								Id: 'MySecondRule',
-								MaxAge: 300
-							}]
+				resources: {
+					Resources: {
+						MyBucket: {
+							Type: 'AWS::S3::Bucket',
+							Properties: {
+								AccessControl: 'Private',
+								PublicAccessBlockConfiguration: {
+									BlockPublicAcls: true,
+									BlockPublicPolicy: true,
+									IgnorePublicAcls: true,
+									RestrictPublicBuckets: true
+								},
+								BucketName: 'my-bucket',
+								CorsConfiguration: {
+									CorsRules: [{
+										AllowedMethods: ['GET', 'POST'],
+										AllowedOrigins: ['http://example.com', 'http://www.example.com'],
+										AllowedHeaders: ['x-foo'],
+										ExposedHeaders: ['x-bar'],
+										Id: 'MyFirstRule',
+										MaxAge: 60
+									}, {
+										AllowedMethods: ['*'],
+										AllowedOrigins: ['*'],
+										AllowedHeaders: ['x-foo', 'x-foo2'],
+										ExposedHeaders: ['x-bar', 'x-bar2'],
+										Id: 'MySecondRule',
+										MaxAge: 300
+									}]
+								}
+							}
 						}
 					}
 				}
@@ -185,7 +205,7 @@ describe('Core plugins', () => {
 
 		it('Should return an object with the raw properties applied', () => {
 
-			const bucketResult = bucket({
+			const bucketResult = bucket({}, {
 				resourceName: 'MyBucket',
 				name: 'my-bucket',
 				rawProps: {
@@ -200,24 +220,67 @@ describe('Core plugins', () => {
 			});
 
 			assert.deepStrictEqual(bucketResult, {
-				MyBucket: {
-					Type: 'AWS::S3::Bucket',
-					Properties: {
-						AccessControl: 'Private',
-						PublicAccessBlockConfiguration: {
-							BlockPublicAcls: true,
-							BlockPublicPolicy: true,
-							IgnorePublicAcls: true,
-							RestrictPublicBuckets: true
-						},
-						BucketName: 'my-bucket',
-						DeletionPolicy: 'Retain',
-						Tags: [
-							{
-								Key: 'MyTag',
-								Value: 'TheValue'
+				resources: {
+					Resources: {
+						MyBucket: {
+							Type: 'AWS::S3::Bucket',
+							Properties: {
+								AccessControl: 'Private',
+								PublicAccessBlockConfiguration: {
+									BlockPublicAcls: true,
+									BlockPublicPolicy: true,
+									IgnorePublicAcls: true,
+									RestrictPublicBuckets: true
+								},
+								BucketName: 'my-bucket',
+								DeletionPolicy: 'Retain',
+								Tags: [
+									{
+										Key: 'MyTag',
+										Value: 'TheValue'
+									}
+								]
 							}
-						]
+						}
+					}
+				}
+			});
+		});
+
+		it('Should mantain previous resources if they are present', () => {
+
+			const bucketResult = bucket({
+				resources: {
+					Resources: {
+						SomePreviousResource: {
+							foo: 'bar'
+						}
+					}
+				}
+			}, {
+				resourceName: 'MyBucket',
+				name: 'my-bucket'
+			});
+
+			assert.deepStrictEqual(bucketResult, {
+				resources: {
+					Resources: {
+						SomePreviousResource: {
+							foo: 'bar'
+						},
+						MyBucket: {
+							Type: 'AWS::S3::Bucket',
+							Properties: {
+								AccessControl: 'Private',
+								PublicAccessBlockConfiguration: {
+									BlockPublicAcls: true,
+									BlockPublicPolicy: true,
+									IgnorePublicAcls: true,
+									RestrictPublicBuckets: true
+								},
+								BucketName: 'my-bucket'
+							}
+						}
 					}
 				}
 			});
