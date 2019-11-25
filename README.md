@@ -4,7 +4,38 @@ A framework to implement serverless framework config file with ease and standari
 
 ## Usage
 
+```js
+// serverless.js
+
+const { helper } = require('sls-helper');
+
+module.exports = helper({
+	hooks: [
+
+		['bucket', {
+			resourceName: 'ServiceBucket',
+			name: 'my-bucket'
+		}],
+
+		'custom.myHelperWithoutConfigs'
+	]
+});
+```
+
 ## Plugins
+
+In order to implement a plugin for the framework, you must publish a package with the following pattern: `sls-helper-plugin-{plugin-name}`.
+
+The `plugin-name` must then be used as a prefix to use a helper of that plugin, for example: `plugin-name.helperName`
+
+The package must export an object mapping helper names to helper implementations.
+
+Each helper is a function that receives the following arguments:
+
+* `serviceConfig`: The current service config object
+* `helperParams`: The (optional) configuration for the helper.
+
+It also has to return the new service config object.
 
 ## Core Helpers
 
