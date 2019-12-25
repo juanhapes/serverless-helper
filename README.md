@@ -2,6 +2,11 @@
 
 A framework to implement serverless framework config file with ease and standarized resources.
 
+## Installation
+```sh
+npm install sls-helper
+```
+
 ## Usage
 
 ```js

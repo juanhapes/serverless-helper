@@ -1,5 +1,5 @@
 {
-  "name": "serverless-helper",
+  "name": "sls-helper",
   "version": "1.0.0",
   "description": "A helper framework to write your serverless application configuration file",
   "main": "lib/helper.js",
@@ -21,6 +21,7 @@
     "serverless-framework",
     "serverless-config-file",
     "helper",
+    "sls-helper",
     "serverless-helper",
     "node",
     "js"
