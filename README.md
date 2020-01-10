@@ -79,3 +79,14 @@ Used to implement Lambda Proxy APIs
 | authorizer | string | The authorizer config | See the [official documentation](https://serverless.com/framework/docs/providers/aws/events/apigateway/#http-endpoints-with-aws_iam-authorizers) | |
 | cors | object \| boolean | See the [official documentation](https://serverless.com/framework/docs/providers/aws/events/apigateway#enabling-cors) | | |
 | async | boolean | Whether the API will execute as an async lambda or not | | false |
+
+
+### Lambda Function
+
+Used to implement Lambda Functions (with no events)
+
+| Option | Type | Description | Attributes | Default value |
+|--------|------|-------------|------------|---------------|
+| functionName | string | The function name | **Required** | |
+| handler | string | The function handler | **Required** | |
+| description | string | The function description | | |
