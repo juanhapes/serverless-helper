@@ -83,6 +83,8 @@ Used to implement Lambda Proxy APIs
 
 ### Lambda Function
 
+_(since 1.1.0)_
+
 Used to implement Lambda Functions (with no events)
 
 | Option | Type | Description | Attributes | Default value |
