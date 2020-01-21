@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.2.0] - 2020-01-21
+### Added
+- `iamStatement` core helper added
+
 ## [1.1.0] - 2020-01-10
 ### Added
 - `function` core helper added
