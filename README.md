@@ -42,9 +42,13 @@ Each helper is a function that receives the following arguments:
 
 It also has to return the new service config object.
 
+Plugin list:
+
+- [JANIS](https://www.npmjs.com/package/sls-helper-plugin-janis)
+
 ## Core Helpers
 
-### bucket
+### S3 Bucket (bucket)
 
 Used to implement a bucket with blocked public access
 
@@ -62,7 +66,52 @@ Used to implement a bucket with blocked public access
 | cors.maxAge, cors[].maxAge | number | The CORS rule max age | | |
 | rawProps | object | Extra raw properties | See the [official documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html) | |
 
-### API Lambda Proxy
+#### Example
+
+```js
+const { helper } = require('sls-helper');
+
+module.exports = helper({
+	hooks: [
+		['bucket', {
+			resourceName: 'ServiceBucket',
+			name: 'my-bucket'
+		}]
+	]
+});
+```
+
+### IAM Role Statement (iamStatement)
+
+_(since 1.2.0)_
+
+Used to implement an IAM Role statement for your service
+
+| Option | Type | Description | Attributes | Default value |
+|--------|------|-------------|------------|---------------|
+| effect | string | The IAM statement effect | Enum('Allow', 'Deny') | `'Allow'` |
+| action | string \| array\<string\> | The IAM statement action | **Required** | |
+| resource | string \| array\<string\> | The IAM statement resource | **Required** | |
+
+#### Example
+
+```js
+const { helper } = require('sls-helper');
+
+module.exports = helper({
+	hooks: [
+		['iamStatement', {
+			action: [
+				's3:PutObject',
+				's3:GetObject'
+			],
+			resource: 'arn:aws:s3:::my-bucket/*'
+		}]
+	]
+});
+```
+
+### API Lambda Proxy (apiLambdaProxy)
 
 Used to implement Lambda Proxy APIs
 
@@ -80,8 +129,25 @@ Used to implement Lambda Proxy APIs
 | cors | object \| boolean | See the [official documentation](https://serverless.com/framework/docs/providers/aws/events/apigateway#enabling-cors) | | |
 | async | boolean | Whether the API will execute as an async lambda or not | | false |
 
+#### Example
 
-### Lambda Function
+```js
+const { helper } = require('sls-helper');
+
+module.exports = helper({
+	hooks: [
+		['apiLambdaProxy', {
+			functionName: 'MyFunctionName',
+			handler: 'path/to/my.handler',
+			path: '/hello-world',
+			method: 'get'
+		}]
+	]
+});
+```
+
+
+### Lambda Function (function)
 
 _(since 1.1.0)_
 
@@ -92,3 +158,18 @@ Used to implement Lambda Functions (with no events)
 | functionName | string | The function name | **Required** | |
 | handler | string | The function handler | **Required** | |
 | description | string | The function description | | |
+
+#### Example
+
+```js
+const { helper } = require('sls-helper');
+
+module.exports = helper({
+	hooks: [
+		['function', {
+			functionName: 'MyFunctionName',
+			handler: 'path/to/my.handler'
+		}]
+	]
+});
+```
