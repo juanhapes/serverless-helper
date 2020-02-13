@@ -146,7 +146,6 @@ module.exports = helper({
 });
 ```
 
-
 ### Lambda Function (function)
 
 _(since 1.1.0)_
@@ -169,6 +168,29 @@ module.exports = helper({
 		['function', {
 			functionName: 'MyFunctionName',
 			handler: 'path/to/my.handler'
+		}]
+	]
+});
+```
+
+### Environment variables (envVars)
+
+_(since 1.3.0)_
+
+Used to implement environment variables
+
+Configuration options are the environment variables key-value object
+
+#### Example
+
+```js
+const { helper } = require('sls-helper');
+
+module.exports = helper({
+	hooks: [
+		['envVars', {
+			MY_VAR: 'and the value',
+			SOME_OTHER_VAR: 'and some other value'
 		}]
 	]
 });
