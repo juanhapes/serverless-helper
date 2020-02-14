@@ -157,6 +157,7 @@ Used to implement Lambda Functions (with no events)
 | functionName | string | The function name | **Required** | |
 | handler | string | The function handler | **Required** | |
 | description | string | The function description | | |
+| timeout | number | The function timeout | | |
 
 #### Example
 
