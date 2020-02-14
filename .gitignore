@@ -4,3 +4,4 @@ node_modules
 # Test and coverage reports
 coverage/
 .nyc_output/
+.npmrc
