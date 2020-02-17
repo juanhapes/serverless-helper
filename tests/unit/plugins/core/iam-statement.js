@@ -78,13 +78,15 @@ describe('Core plugins', () => {
 			});
 
 			assert.deepStrictEqual(result, {
-				iamRoleStatements: [
-					{
-						Effect: 'Allow',
-						Action: 's3:putObject',
-						Resource: 'my-bucket-resource'
-					}
-				]
+				provider: {
+					iamRoleStatements: [
+						{
+							Effect: 'Allow',
+							Action: 's3:putObject',
+							Resource: 'my-bucket-resource'
+						}
+					]
+				}
 			});
 		});
 
@@ -97,13 +99,15 @@ describe('Core plugins', () => {
 			});
 
 			assert.deepStrictEqual(result, {
-				iamRoleStatements: [
-					{
-						Effect: 'Allow',
-						Action: 's3:putObject',
-						Resource: 'my-bucket-resource'
-					}
-				]
+				provider: {
+					iamRoleStatements: [
+						{
+							Effect: 'Allow',
+							Action: 's3:putObject',
+							Resource: 'my-bucket-resource'
+						}
+					]
+				}
 			});
 		});
 
@@ -116,26 +120,30 @@ describe('Core plugins', () => {
 			});
 
 			assert.deepStrictEqual(result, {
-				iamRoleStatements: [
-					{
-						Effect: 'Allow',
-						Action: ['s3:putObject', 's3:getObject'],
-						Resource: ['my-bucket-resource', 'my-other-bucket-resource']
-					}
-				]
+				provider: {
+					iamRoleStatements: [
+						{
+							Effect: 'Allow',
+							Action: ['s3:putObject', 's3:getObject'],
+							Resource: ['my-bucket-resource', 'my-other-bucket-resource']
+						}
+					]
+				}
 			});
 		});
 
 		it('Should append to previous IAM statements', () => {
 
 			const result = iamStatement({
-				iamRoleStatements: [
-					{
-						Effect: 'Allow',
-						Action: 's3:putObject',
-						Resource: 'my-previous-bucket-resource'
-					}
-				]
+				provider: {
+					iamRoleStatements: [
+						{
+							Effect: 'Allow',
+							Action: 's3:putObject',
+							Resource: 'my-previous-bucket-resource'
+						}
+					]
+				}
 			}, {
 				effect: 'Deny',
 				action: 's3:putObject',
@@ -143,18 +151,20 @@ describe('Core plugins', () => {
 			});
 
 			assert.deepStrictEqual(result, {
-				iamRoleStatements: [
-					{
-						Effect: 'Allow',
-						Action: 's3:putObject',
-						Resource: 'my-previous-bucket-resource'
-					},
-					{
-						Effect: 'Deny',
-						Action: 's3:putObject',
-						Resource: 'my-bucket-resource'
-					}
-				]
+				provider: {
+					iamRoleStatements: [
+						{
+							Effect: 'Allow',
+							Action: 's3:putObject',
+							Resource: 'my-previous-bucket-resource'
+						},
+						{
+							Effect: 'Deny',
+							Action: 's3:putObject',
+							Resource: 'my-bucket-resource'
+						}
+					]
+				}
 			});
 		});
 	});
