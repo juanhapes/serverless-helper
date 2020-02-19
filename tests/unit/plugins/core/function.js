@@ -30,7 +30,8 @@ describe('Core plugins', () => {
 				functionName: 'MyFunction',
 				handler: 'path/to/handler.export',
 				description: 'My super description',
-				timeout: 6
+				timeout: 6,
+				package: { include: ['path/to/includ/file.js'] }
 			});
 
 			assert.deepStrictEqual(lambdaFunctionResult, {
@@ -38,7 +39,8 @@ describe('Core plugins', () => {
 					MyFunction: {
 						handler: 'path/to/handler.export',
 						description: 'My super description',
-						timeout: 6
+						timeout: 6,
+						package: { include: ['path/to/includ/file.js'] }
 					}
 				}]
 			});
