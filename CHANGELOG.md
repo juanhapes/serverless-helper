@@ -5,8 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.5.0] - 2020-02-19
 ### Added
 - `package.include` property support for functions
+- Bucket `tags` property added
 
 ## [1.4.1] - 2020-02-17
 ### Added
