@@ -64,6 +64,7 @@ Used to implement a bucket with blocked public access
 | cors.headers, cors[].headers | array \| string | The CORS rule headers(s) | | |
 | cors.exposedHeaders, cors[].exposedHeaders | array \| string | The CORS rule exposed headers(s) | | |
 | cors.maxAge, cors[].maxAge | number | The CORS rule max age | | |
+| tags | object | A key-value object of tags to associate to the bucket | | |
 | rawProps | object | Extra raw properties | See the [official documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket.html) | |
 
 #### Example

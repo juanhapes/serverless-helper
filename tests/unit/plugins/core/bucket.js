@@ -203,6 +203,48 @@ describe('Core plugins', () => {
 			});
 		});
 
+		it('Should return an object with tags', () => {
+
+			const bucketResult = bucket({}, {
+				resourceName: 'MyBucket',
+				name: 'my-bucket',
+				tags: {
+					foo: 'bar',
+					baz: 'yeah'
+				}
+			});
+
+			assert.deepStrictEqual(bucketResult, {
+				resources: {
+					Resources: {
+						MyBucket: {
+							Type: 'AWS::S3::Bucket',
+							Properties: {
+								AccessControl: 'Private',
+								PublicAccessBlockConfiguration: {
+									BlockPublicAcls: true,
+									BlockPublicPolicy: true,
+									IgnorePublicAcls: true,
+									RestrictPublicBuckets: true
+								},
+								BucketName: 'my-bucket',
+								Tags: [
+									{
+										Key: 'foo',
+										Value: 'bar'
+									},
+									{
+										Key: 'baz',
+										Value: 'yeah'
+									}
+								]
+							}
+						}
+					}
+				}
+			});
+		});
+
 		it('Should return an object with the raw properties applied', () => {
 
 			const bucketResult = bucket({}, {
