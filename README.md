@@ -151,7 +151,7 @@ module.exports = helper({
 
 _(since 1.1.0)_
 
-Used to implement Lambda Functions (with no events)
+Used to implement Lambda Functions
 
 | Option | Type | Description | Attributes | Default value |
 |--------|------|-------------|------------|---------------|
