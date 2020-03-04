@@ -158,6 +158,7 @@ Used to implement Lambda Functions (with no events)
 | functionName | string | The function name | **Required** | |
 | handler | string | The function handler | **Required** | |
 | description | string | The function description | | |
+| schedule | string | The function schedule rule | | |
 | timeout | number | The function timeout | | |
 | package.include | array[string] | The List of paths of files to include | | |
 
