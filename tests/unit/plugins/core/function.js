@@ -68,27 +68,16 @@ describe('Core plugins', () => {
 			});
 		});
 
-		it('Should not include the events property when it isn\'t an array', () => {
+		it('Should throw when a function events property isn\'t an array', () => {
 
-			const lambdaFunctionResult = lambdaFunction({}, {
+			assert.throws(() => lambdaFunction({}, {
 				functionName: 'MyFunction',
 				handler: 'path/to/handler.export',
 				description: 'My super description',
 				timeout: 6,
 				events: { not: 'an array' },
 				package: { include: ['path/to/includ/file.js'] }
-			});
-
-			assert.deepStrictEqual(lambdaFunctionResult, {
-				functions: [{
-					MyFunction: {
-						handler: 'path/to/handler.export',
-						description: 'My super description',
-						timeout: 6,
-						package: { include: ['path/to/includ/file.js'] }
-					}
-				}]
-			});
+			}));
 		});
 	});
 });
