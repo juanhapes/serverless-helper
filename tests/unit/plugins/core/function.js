@@ -30,8 +30,18 @@ describe('Core plugins', () => {
 				functionName: 'MyFunction',
 				handler: 'path/to/handler.export',
 				description: 'My super description',
-				schedule: 'rate(1 hour)',
 				timeout: 6,
+				events: [
+					{
+						schedule: 'rate(1 hour)'
+					},
+					{
+						s3: {
+							bucket: 'myBucket',
+							event: 's3:ObjectCreated:*'
+						}
+					}
+				],
 				package: { include: ['path/to/includ/file.js'] }
 			});
 
@@ -40,12 +50,34 @@ describe('Core plugins', () => {
 					MyFunction: {
 						handler: 'path/to/handler.export',
 						description: 'My super description',
-						schedule: 'rate(1 hour)',
 						timeout: 6,
+						events: [
+							{
+								schedule: 'rate(1 hour)'
+							},
+							{
+								s3: {
+									bucket: 'myBucket',
+									event: 's3:ObjectCreated:*'
+								}
+							}
+						],
 						package: { include: ['path/to/includ/file.js'] }
 					}
 				}]
 			});
+		});
+
+		it('Should throw when a function events property isn\'t an array', () => {
+
+			assert.throws(() => lambdaFunction({}, {
+				functionName: 'MyFunction',
+				handler: 'path/to/handler.export',
+				description: 'My super description',
+				timeout: 6,
+				events: { not: 'an array' },
+				package: { include: ['path/to/includ/file.js'] }
+			}));
 		});
 	});
 });

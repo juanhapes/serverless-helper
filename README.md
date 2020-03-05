@@ -151,14 +151,14 @@ module.exports = helper({
 
 _(since 1.1.0)_
 
-Used to implement Lambda Functions (with no events)
+Used to implement Lambda Functions
 
 | Option | Type | Description | Attributes | Default value |
 |--------|------|-------------|------------|---------------|
 | functionName | string | The function name | **Required** | |
 | handler | string | The function handler | **Required** | |
 | description | string | The function description | | |
-| schedule | string | The function schedule rule | | |
+| events | array[object] | The function events | | |
 | timeout | number | The function timeout | | |
 | package.include | array[string] | The List of paths of files to include | | |
 
@@ -171,7 +171,22 @@ module.exports = helper({
 	hooks: [
 		['function', {
 			functionName: 'MyFunctionName',
-			handler: 'path/to/my.handler'
+			handler: 'path/to/my.handler',
+			events: [
+				{
+					schedule: 'rate(1 hour)',
+				},
+				{
+					s3: {
+						bucket: 'myBucket',
+						event: 's3:ObjectCreated:*',
+						rules: [
+							{ prefix: 'somePrefix' },
+							{ suffix: 'someSuffix' }
+						]
+					}
+				}
+			]
 		}]
 	]
 });
