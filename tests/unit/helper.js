@@ -44,6 +44,14 @@ describe('Helper execution', () => {
 			mockRequire.stop('../../lib/plugins/core');
 		});
 
+		it('Should throw if core hook does not exist', () => {
+			assert.throws(() => helper({ hooks: ['unknownHook'] }));
+		});
+
+		it('Should throw if plugin hook does not exist', () => {
+			assert.throws(() => helper({ hooks: ['custom.unknownHook'] }));
+		});
+
 		it('Should return an empty object if no hooks are configured', () => {
 			const service = helper({});
 			assert.deepStrictEqual(service, {});
