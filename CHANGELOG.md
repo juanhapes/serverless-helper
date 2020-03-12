@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.7.1] - 2020-03-12
+## Fixed
+- Unknown hook error handle added
+
 ## [1.7.0] - 2020-03-05
 ## Added
 - `events` property support for functions
