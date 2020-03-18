@@ -214,3 +214,34 @@ module.exports = helper({
 	]
 });
 ```
+
+### Resource (resource)
+
+_(since 1.8.0)_
+
+Used to implement custom resources
+
+| Option | Type | Description | Attributes | Default value |
+|--------|------|-------------|------------|---------------|
+| name | string | The resource logical name | **Required** | |
+| resource | object | The resource configuration object for Cloudformation | **Required** | |
+
+#### Example
+
+```js
+const { helper } = require('sls-helper');
+
+module.exports = helper({
+	hooks: [
+		['resource', {
+			name: 'MyQueue',
+			resource: {
+				Type: 'AWS::SQS::Queue',
+				Properties: {
+					QueueName: 'my-super-queue'
+				}
+			}
+		}]
+	]
+});
+```
