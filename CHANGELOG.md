@@ -6,15 +6,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.8.0] - 2020-03-18
+### Added
+- `resource` hook added
+
+### Fixed
+- `envVar` error messages are now more accurate
+
 ## [1.7.1] - 2020-03-12
-## Fixed
+### Fixed
 - Unknown hook error handle added
 
 ## [1.7.0] - 2020-03-05
-## Added
+### Added
 - `events` property support for functions
 
-## Fixed
+### Fixed
 - `schedule` property for functions moved to events property
 
 ## [1.6.0] - 2020-03-04
