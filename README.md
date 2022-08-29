@@ -160,6 +160,7 @@ Used to implement Lambda Functions
 | description | string | The function description | | |
 | events | array[object] | The function events | | |
 | timeout | number | The function timeout | | |
+| memorySize | number | The function memorySize in MB _(since 1.10.0)_ | | |
 | package.include | array[string] | The List of paths of files to include | | |
 
 #### Example
