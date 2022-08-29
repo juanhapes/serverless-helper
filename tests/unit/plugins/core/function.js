@@ -31,6 +31,7 @@ describe('Core plugins', () => {
 				handler: 'path/to/handler.export',
 				description: 'My super description',
 				timeout: 6,
+				memorySize: 2048,
 				events: [
 					{
 						schedule: 'rate(1 hour)'
@@ -42,7 +43,7 @@ describe('Core plugins', () => {
 						}
 					}
 				],
-				package: { include: ['path/to/includ/file.js'] }
+				package: { include: ['path/to/include/file.js'] }
 			});
 
 			assert.deepStrictEqual(lambdaFunctionResult, {
@@ -51,6 +52,7 @@ describe('Core plugins', () => {
 						handler: 'path/to/handler.export',
 						description: 'My super description',
 						timeout: 6,
+						memorySize: 2048,
 						events: [
 							{
 								schedule: 'rate(1 hour)'
@@ -62,7 +64,7 @@ describe('Core plugins', () => {
 								}
 							}
 						],
-						package: { include: ['path/to/includ/file.js'] }
+						package: { include: ['path/to/include/file.js'] }
 					}
 				}]
 			});
@@ -76,7 +78,7 @@ describe('Core plugins', () => {
 				description: 'My super description',
 				timeout: 6,
 				events: { not: 'an array' },
-				package: { include: ['path/to/includ/file.js'] }
+				package: { include: ['path/to/include/file.js'] }
 			}));
 		});
 	});
