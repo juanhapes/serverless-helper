@@ -32,6 +32,7 @@ describe('Core plugins', () => {
 				description: 'My super description',
 				timeout: 6,
 				memorySize: 2048,
+				reservedConcurrency: 1,
 				events: [
 					{
 						schedule: 'rate(1 hour)'
@@ -53,6 +54,7 @@ describe('Core plugins', () => {
 						description: 'My super description',
 						timeout: 6,
 						memorySize: 2048,
+						reservedConcurrency: 1,
 						events: [
 							{
 								schedule: 'rate(1 hour)'
