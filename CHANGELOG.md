@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.10.0] - 2020-08-29
+### Added
+- `reservedConcurrency` property support for functions
+
+## [1.10.0] - 2022-08-29
 ### Added
 - `memorySize` property support for functions
 
