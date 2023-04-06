@@ -2,7 +2,7 @@
 
 const assert = require('assert').strict;
 
-const { bucket } = require('../../.././../lib/plugins/core');
+const { bucket } = require('../../../../lib/plugins/core');
 
 describe('Core plugins', () => {
 

@@ -2,7 +2,7 @@
 
 const assert = require('assert').strict;
 
-const { envVars } = require('../../.././../lib/plugins/core');
+const { envVars } = require('../../../../lib/plugins/core');
 
 describe('Core plugins', () => {
 

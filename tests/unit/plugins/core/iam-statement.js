@@ -2,7 +2,7 @@
 
 const assert = require('assert').strict;
 
-const { iamStatement } = require('../../.././../lib/plugins/core');
+const { iamStatement } = require('../../../../lib/plugins/core');
 
 describe('Core plugins', () => {
 

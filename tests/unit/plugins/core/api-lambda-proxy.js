@@ -2,7 +2,7 @@
 
 const assert = require('assert').strict;
 
-const { apiLambdaProxy } = require('../../.././../lib/plugins/core');
+const { apiLambdaProxy } = require('../../../../lib/plugins/core');
 
 describe('Core plugins', () => {
 
