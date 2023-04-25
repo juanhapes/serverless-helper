@@ -72,6 +72,26 @@ describe('Core plugins', () => {
 			});
 		});
 
+		it('Should add raw properties to function configuration it they were set', () => {
+
+			const lambdaFunctionResult = lambdaFunction({}, {
+				functionName: 'MyFunction',
+				handler: 'path/to/handler.export',
+				rawProperties: {
+					maximumRetryAttempts: 1
+				}
+			});
+
+			assert.deepStrictEqual(lambdaFunctionResult, {
+				functions: [{
+					MyFunction: {
+						maximumRetryAttempts: 1,
+						handler: 'path/to/handler.export'
+					}
+				}]
+			});
+		});
+
 		it('Should throw when a function events property isn\'t an array', () => {
 
 			assert.throws(() => lambdaFunction({}, {

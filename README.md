@@ -163,6 +163,7 @@ Used to implement Lambda Functions
 | memorySize | number | The function memorySize in MB _(since 1.10.0)_ | | |
 | reservedConcurrency | number | Reserved concurrency limit for the function. By default, AWS uses account concurrency limit _(since 1.11.0)_ | | |
 | package.include | array[string] | The List of paths of files to include | | |
+| rawProperties | object | Raw properties to be setup in the function configuration object | | |
 
 #### Example
 
@@ -188,7 +189,10 @@ module.exports = helper({
 						]
 					}
 				}
-			]
+			],
+			rawProperties: {
+				rawProperties: 1
+			}
 		}]
 	]
 });
