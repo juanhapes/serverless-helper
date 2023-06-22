@@ -44,7 +44,8 @@ describe('Core plugins', () => {
 						}
 					}
 				],
-				package: { include: ['path/to/include/file.js'] }
+				package: { include: ['path/to/include/file.js'] },
+				url: true
 			});
 
 			assert.deepStrictEqual(lambdaFunctionResult, {
@@ -66,7 +67,8 @@ describe('Core plugins', () => {
 								}
 							}
 						],
-						package: { include: ['path/to/include/file.js'] }
+						package: { include: ['path/to/include/file.js'] },
+						url: true
 					}
 				}]
 			});
