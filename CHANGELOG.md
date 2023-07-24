@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.14.0] - 2023-07-24
+### Added
+- Support for `layers` and `addLayers` in the `function` hook
+
 ## [1.13.0] - 2023-07-13
 ### Added
 - Lambda URL support by setting the `url` property in the `function` hook
