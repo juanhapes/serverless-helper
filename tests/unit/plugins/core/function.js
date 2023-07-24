@@ -105,5 +105,96 @@ describe('Core plugins', () => {
 				package: { include: ['path/to/include/file.js'] }
 			}));
 		});
+
+		it('Should override function layers if layers is passed', () => {
+
+			const lambdaFunctionResult = lambdaFunction({
+				provider: {
+					layers: ['DefaultLayer']
+				}
+			}, {
+				functionName: 'MyFunction',
+				handler: 'path/to/handler.export',
+				layers: ['SomeCustomLayer']
+			});
+
+			assert.deepStrictEqual(lambdaFunctionResult, {
+				provider: {
+					layers: ['DefaultLayer']
+				},
+				functions: [{
+					MyFunction: {
+						layers: ['SomeCustomLayer'],
+						handler: 'path/to/handler.export'
+					}
+				}]
+			});
+		});
+
+		it('Should append function layers if addLayers is passed', () => {
+
+			const lambdaFunctionResult = lambdaFunction({
+				provider: {
+					layers: ['DefaultLayer']
+				}
+			}, {
+				functionName: 'MyFunction',
+				handler: 'path/to/handler.export',
+				addLayers: ['SomeCustomLayer']
+			});
+
+			assert.deepStrictEqual(lambdaFunctionResult, {
+				provider: {
+					layers: ['DefaultLayer']
+				},
+				functions: [{
+					MyFunction: {
+						layers: ['DefaultLayer', 'SomeCustomLayer'],
+						handler: 'path/to/handler.export'
+					}
+				}]
+			});
+		});
+
+		it('Should set function layers if addLayers is passed but no global layers are set', () => {
+
+			const lambdaFunctionResult = lambdaFunction({}, {
+				functionName: 'MyFunction',
+				handler: 'path/to/handler.export',
+				addLayers: ['SomeCustomLayer']
+			});
+
+			assert.deepStrictEqual(lambdaFunctionResult, {
+				functions: [{
+					MyFunction: {
+						layers: ['SomeCustomLayer'],
+						handler: 'path/to/handler.export'
+					}
+				}]
+			});
+		});
+
+		it('Should not set any function layers if neither layers nor addLayers are passed', () => {
+
+			const lambdaFunctionResult = lambdaFunction({
+				provider: {
+					layers: ['DefaultLayer']
+				}
+			}, {
+				functionName: 'MyFunction',
+				handler: 'path/to/handler.export'
+			});
+
+			assert.deepStrictEqual(lambdaFunctionResult, {
+				provider: {
+					layers: ['DefaultLayer']
+				},
+				functions: [{
+					MyFunction: {
+						handler: 'path/to/handler.export'
+					}
+				}]
+			});
+		});
 	});
 });

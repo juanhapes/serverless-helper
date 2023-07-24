@@ -159,6 +159,8 @@ Used to implement Lambda Functions
 | handler | string | The function handler | **Required** | |
 | description | string | The function description | | |
 | events | array[object] | The function events | | |
+| layers | array[object] | An array of function-level layers. This will override any provider-level layers _(since 1.14.0)_ | | |
+| addLayers | array[object] | An array of function-level layers. This will be appended to any provider-level layers _(since 1.14.0)_ | | |
 | timeout | number | The function timeout | | |
 | memorySize | number | The function memorySize in MB _(since 1.10.0)_ | | |
 | reservedConcurrency | number | Reserved concurrency limit for the function. By default, AWS uses account concurrency limit _(since 1.11.0)_ | | |
