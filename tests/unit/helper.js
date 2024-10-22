@@ -44,21 +44,21 @@ describe('Helper execution', () => {
 			mockRequire.stop('../../lib/plugins/core');
 		});
 
-		it('Should throw if core hook does not exist', () => {
-			assert.throws(() => helper({ hooks: ['unknownHook'] }));
+		it('Should reject if core hook does not exist', async () => {
+			await assert.rejects(() => helper({ hooks: ['unknownHook'] }));
 		});
 
-		it('Should throw if plugin hook does not exist', () => {
-			assert.throws(() => helper({ hooks: ['custom.unknownHook'] }));
+		it('Should reject if plugin hook does not exist', async () => {
+			await assert.rejects(() => helper({ hooks: ['custom.unknownHook'] }));
 		});
 
-		it('Should return an empty object if no hooks are configured', () => {
-			const service = helper({});
+		it('Should resolve an empty object if no hooks are configured', async () => {
+			const service = await helper({});
 			assert.deepStrictEqual(service, {});
 		});
 
-		it('Should return the processed object if one unprefixed plugin is configured', () => {
-			const service = helper({
+		it('Should resolve the processed object if one unprefixed plugin is configured', async () => {
+			const service = await helper({
 				hooks: [
 					'someHelper'
 				]
@@ -68,8 +68,8 @@ describe('Helper execution', () => {
 			});
 		});
 
-		it('Should return the processed object if one core plugin is configured', () => {
-			const service = helper({
+		it('Should resolve the processed object if one core plugin is configured', async () => {
+			const service = await helper({
 				hooks: [
 					'core.someHelper'
 				]
@@ -79,8 +79,8 @@ describe('Helper execution', () => {
 			});
 		});
 
-		it('Should return the processed object if one custom plugin is configured', () => {
-			const service = helper({
+		it('Should resolve the processed object if one custom plugin is configured', async () => {
+			const service = await helper({
 				hooks: [
 					'custom.someHelper'
 				]
@@ -98,8 +98,8 @@ describe('Helper execution', () => {
 			}));
 		});
 
-		it('Should return the processed object if two plugins are configured', () => {
-			const service = helper({
+		it('Should resolve the processed object if two plugins are configured', async () => {
+			const service = await helper({
 				hooks: [
 					'core.someHelper',
 					'custom.someHelper'
