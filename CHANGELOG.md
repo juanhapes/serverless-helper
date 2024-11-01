@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.15.0] - 2023-10-22
+### Added
+- Support for async hooks
+
 ## [1.14.0] - 2023-07-24
 ### Added
 - Support for `layers` and `addLayers` in the `function` hook
